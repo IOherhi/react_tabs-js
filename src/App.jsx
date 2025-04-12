@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './App.scss';
+import {Tabs} from './components/Tabs';
 
 export const App = () => {
   const [activeTab, setActive] = useState('tab-1');
@@ -29,7 +30,7 @@ export const App = () => {
       <div data-cy="TabsComponent">
         <div className="tabs is-boxed">
           <ul>
-            {tabs.map((item) => {
+            {tabs.map(item => {
               return (
                 <li
                   className={activeTab === item.id ? 'is-active' : ''}
@@ -51,9 +52,7 @@ export const App = () => {
           </ul>
         </div>
 
-        <div className="block" data-cy="TabContent">
-          {activeTabContent};
-        </div>
+        <Tabs activeTabContent={activeTabContent} />
       </div>
     </div>
   );
