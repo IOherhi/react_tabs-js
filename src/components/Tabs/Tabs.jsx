@@ -1,7 +1,7 @@
-export const Tabs = ({ activeTabContent }) => {
+export const Tabs = ({ tabContent }) => {
   return (
-    <div className="block" data-cy={activeTabContent}>
-      {activeTabContent}
+    <div className="block" data-cy={tabContent}>
+      {tabContent}
     </div>
   );
 };

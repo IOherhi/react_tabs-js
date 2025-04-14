@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './App.scss';
-import {Tabs} from './components/Tabs';
+import { Tabs } from './components/Tabs';
 
 export const App = () => {
   const [activeTab, setActive] = useState('tab-1');
@@ -19,7 +19,7 @@ export const App = () => {
     }
   };
 
-  const activeTabContent = tabs.find(arr => arr.id === activeTab).content;
+  const tabContent = tabs.find(arr => arr.id === activeTab).content;
 
   return (
     <div className="section">
@@ -30,21 +30,21 @@ export const App = () => {
       <div data-cy="TabsComponent">
         <div className="tabs is-boxed">
           <ul>
-            {tabs.map(item => {
+            {tabs.map(tab => {
               return (
                 <li
-                  className={activeTab === item.id ? 'is-active' : ''}
-                  key={item.id}
+                  className={activeTab === tab.id ? 'is-active' : ''}
+                  key={tab.id}
                   data-cy="Tab"
                 >
                   <a
-                    href={`#${item.id}`}
+                    href={`#${tab.id}`}
                     data-cy="TabLink"
                     onClick={() => {
-                      handleTabClick(item.id);
+                      handleTabClick(tab.id);
                     }}
                   >
-                    {item.title}
+                    {tab.title}
                   </a>
                 </li>
               );
@@ -52,7 +52,7 @@ export const App = () => {
           </ul>
         </div>
 
-        <Tabs activeTabContent={activeTabContent} />
+        <Tabs tabContent={tabContent} />
       </div>
     </div>
   );
