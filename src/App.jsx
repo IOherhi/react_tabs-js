@@ -5,55 +5,31 @@ import './App.scss';
 import { Tabs } from './components/Tabs';
 
 export const App = () => {
-  const [activeTab, setActive] = useState('tab-1');
-
   const tabs = [
     { id: 'tab-1', title: 'Tab 1', content: 'Some text 1' },
     { id: 'tab-2', title: 'Tab 2', content: 'Some text 2' },
     { id: 'tab-3', title: 'Tab 3', content: 'Some text 3' },
   ];
 
-  const handleTabClick = id => {
-    if (id !== activeTab) {
-      setActive(id);
+  const [activeTabId, setActiveTabId] = useState(tabs[0].id);
+
+  const handleTabSelected = id => {
+    if (id !== activeTabId) {
+      setActiveTabId(id);
     }
   };
 
-  const tabContent = tabs.find(arr => arr.id === activeTab).content;
+  const activeTab = tabs.find(tab => tab.id === activeTabId) || tabs[0];
 
   return (
     <div className="section">
-      <h1 className="title">
-        Selected tab is {tabs.find(arr => arr.id === activeTab).title}
-      </h1>
+      <h1 className="title">Selected tab is {activeTab.title}</h1>
 
-      <div data-cy="TabsComponent">
-        <div className="tabs is-boxed">
-          <ul>
-            {tabs.map(tab => {
-              return (
-                <li
-                  className={activeTab === tab.id ? 'is-active' : ''}
-                  key={tab.id}
-                  data-cy="Tab"
-                >
-                  <a
-                    href={`#${tab.id}`}
-                    data-cy="TabLink"
-                    onClick={() => {
-                      handleTabClick(tab.id);
-                    }}
-                  >
-                    {tab.title}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-
-        <Tabs tabContent={tabContent} />
-      </div>
+      <Tabs
+        tabs={tabs}
+        activeTabId={activeTabId}
+        onTabSelected={handleTabSelected}
+      />
     </div>
   );
 };
